@@ -1,0 +1,84 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Supplier List{% endblock title %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">Product</a></li>
+                            <li class="active">List</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="box-title">Supplier List </h4>
+            </div>
+            <div class="card-body--">
+                <div class="table-stats order-table ov-h">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                            <th class="serial">#</th> 
+                               <th>Name</th>
+                               <th>Phone</th>
+                               <th>Product</th>
+                               <th>Company</th>
+                               <th>Description</th>
+                               <th>Action</th>
+                           </tr>
+                       </thead>
+                        <tbody>
+                            {% if queryset %}
+                            {% for supplier in queryset %}
+                            <tr>
+                                <td class="serial">{{ forloop.counter }}</td>
+                                <td>{{ supplier.name }}</td>
+                                <td>{{ supplier.phone_no }}</td>
+                                <td>{{ supplier.product }}</td>
+                                <td>{{ supplier.company }}</td>
+                                <td>{{ supplier.description }}</td>
+                                <td><a href="/supplier/update_supplier/{{supplier.id}}"><button class ="btn btn-primary btn-sm mb-1" type="button" >Edit</button> </a>
+                                    <a href="/accounts/delete_supplier/{{supplier.id}}"> <button class ="btn btn-danger btn-sm mb-1" type="button">Delete</button></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                                <tr><td></td>
+                                    <td>No Data</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div> <!-- /.table-stats -->
+            </div>
+        </div> <!-- /.card -->
+    </div>  <!-- /.col-lg-8 -->
+
+    
+</div>
+<script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+{% endblock content %}
